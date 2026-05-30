@@ -260,12 +260,7 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-// --- SERVIDOR HTTPS ---
-const opcionesSSL = {
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert')
-};
-
-https.createServer(opcionesSSL, app).listen(3000, () => {
-    console.log(' Servidor TS seguro en https://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en puerto ${PORT}`);
 });
