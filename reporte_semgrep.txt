@@ -1,0 +1,33 @@
+                   
+                   
+┌─────────────────┐
+│ 3 Code Findings │
+└─────────────────┘
+                             
+  [36m[22m[24m  server.key[0m
+   ❯❯❱ [1mgeneric.secrets.security.detected-private-key.detected-private-key[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Private Key detected. This is a sensitive credential and
+          should not be hardcoded here. Instead, store this in a  
+          separate, private file.                                 
+          Details: https://sg.run/b7dr                            
+                                                                  
+            1┆ -----BEGIN PRIVATE KEY-----
+            2┆ MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC
+               fwaeIEDllFRzd                                      
+                            
+  [36m[22m[24m  server.ts[0m
+    ❯❱ [1mjavascript.jsonwebtoken.security.jwt-hardcode.hardcoded-jwt-secret[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          A hard-coded credential was detected. It is not recommended
+          to store credentials in source-code, as this risks secrets 
+          being leaked and used by either an internal or external    
+          malicious adversary. It is recommended to use environment  
+          variables to securely provide credentials or retrieve      
+          credentials from a secure vault or HSM (Hardware Security  
+          Module).                                                   
+          Details: https://sg.run/4xN9                               
+                                                                     
+           80┆ const decodificado = jwt.verify(token, JWT_SECRET);
+            ⋮┆----------------------------------------
+          116┆ }, JWT_SECRET, { expiresIn: '1h' });
