@@ -4,8 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const https_1 = __importDefault(require("https"));
-const fs_1 = __importDefault(require("fs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const app = (0, express_1.default)();
@@ -216,11 +214,7 @@ app.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
 });
-// --- SERVIDOR HTTPS ---
-const opcionesSSL = {
-    key: fs_1.default.readFileSync('server.key'),
-    cert: fs_1.default.readFileSync('server.cert')
-};
-https_1.default.createServer(opcionesSSL, app).listen(3000, () => {
-    console.log(' Servidor TS seguro en https://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en puerto ${PORT}`);
 });
